@@ -1,0 +1,44 @@
+#encabezado{
+    height: 7vw;
+    background-color: antiquewhite;
+    border-color: black;
+    border-radius: 2px;
+}
+.logo{
+    height: 7vw;
+    display: flex;
+}
+nav{
+    padding-left: 30vw;
+}
+nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 3vw;
+    font-weight: 50;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #6c5ce7;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+}
+.nav-links li{
+    display: inline;
+    list-style-type: none;
+    justify-content: space-around;
+}
