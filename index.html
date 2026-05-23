@@ -4,54 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos.css">
-    <title>Gestor de Libros - Inicio</title>
+    <title>LeeSmart - Inicio</title>
 </head>
 <body>
-    <header class="site-header" id="encabezado">
-        <a href="index.html" class="brand" aria-label="Inicio">
-            <img class="logo" src="https://images.vexels.com/media/users/3/229082/isolated/preview/6fabc24c3830d75486725cc6d786dfbb-logotipo-de-circulos-de-libro.png" alt="Logo">
+    <header class="encabezado-sitio" id="encabezado-principal">
+        <a href="index.html" class="marca" aria-label="Inicio">
+            <svg class="logo-libro" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="30" height="60" fill="#4A90E2" rx="3"/>
+                <rect x="50" y="20" width="30" height="60" fill="#9B59B6" rx="3"/>
+                <line x1="50" y1="20" x2="50" y2="80" stroke="#fff" stroke-width="2"/>
+                <line x1="25" y1="35" x2="45" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="45" x2="45" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="55" x2="45" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="35" x2="75" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="45" x2="75" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="55" x2="75" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+            </svg>
+            <span class="marca-titulo">LeeSmart</span>
         </a>
 
-        <nav class="main-nav" aria-label="Principal">
-            <ul class="nav-links">
-                <li>
-                    <a href="index.html">Inicio</a>
-                </li>
-                <li>
-                    <a href="libros.html">Descubrir</a>
-                </li>
-                <li>
-                    <a href="generos.html">Géneros</a>
-                </li>
-                <li>
-                    <a href="biblioteca.html">Mi Biblioteca</a>
-                </li>
+        <nav class="navegacion-principal" aria-label="Principal">
+            <ul class="enlaces-nav">
+                <li><a href="index.html" class="enlace-activo">Inicio</a></li>
+                <li><a href="libros.html">Descubrir</a></li>
+                <li><a href="generos.html">Géneros</a></li>
+                <li><a href="biblioteca.html">Mi Biblioteca</a></li>
             </ul>
         </nav>
 
-        <div class="header-actions">
-            <span id="user-info" style="color: #ffffff; margin-right: 1rem; display: none;"></span>
-            <a href="login.html" id="login-link" class="btn btn-login">Iniciar sesión <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg></a>
-            <a href="registro.html" id="signup-link" class="btn btn-signup">Registrarse</a>
-            <button id="logout-btn" class="btn btn-logout" style="display: none;">Cerrar sesión</button>
+        <div class="acciones-encabezado">
+            <span id="info-usuario" class="info-usuario"></span>
+            <a href="login.html" id="enlace-login" class="boton boton-primario">Iniciar sesión</a>
+            <a href="registro.html" id="enlace-registro" class="boton boton-secundario">Registrarse</a>
+            <button id="boton-cerrar-sesion" class="boton boton-peligro" style="display: none;">Cerrar sesión</button>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Bienvenido al Gestor de Libros</h1>
-            <p>Descubre, alquila y gestiona tu biblioteca de libros favoritos</p>
-            <a href="libros.html" class="btn btn-primary">Explorar Libros</a>
+    <main class="contenedor-principal">
+        <section class="seccion-hero">
+            <div class="contenido-hero">
+                <div class="texto-hero">
+                    <h1>Descubre tu Próxima Lectura Favorita</h1>
+                    <p>Accede a miles de libros, alquila tus favoritos y gestiona tu biblioteca personal de forma fácil y rápida.</p>
+                    <div class="botones-hero">
+                        <a href="libros.html" class="boton boton-primario boton-grande">Explorar Libros</a>
+                        <a href="generos.html" class="boton boton-terciario boton-grande">Ver Géneros</a>
+                    </div>
+                </div>
+                <div class="imagen-hero">
+                    <svg viewBox="0 0 500 500" class="svg-ilustracion">
+                        <!-- Círculo decorativo de fondo -->
+                        <circle cx="250" cy="250" r="240" fill="#e8f4f8" opacity="0.3"/>
+
+                        <!-- Libro 1 - Azul claro -->
+                        <g class="libro libro1">
+                            <rect x="80" y="100" width="70" height="120" fill="#4A90E2" rx="5" ry="5"/>
+                            <rect x="85" y="110" width="60" height="100" fill="#6ba3f5" rx="3" ry="3"/>
+                            <line x1="85" y1="130" x2="145" y2="130" stroke="#4A90E2" stroke-width="2"/>
+                            <line x1="85" y1="150" x2="145" y2="150" stroke="#4A90E2" stroke-width="2"/>
+                            <line x1="85" y1="170" x2="145" y2="170" stroke="#4A90E2" stroke-width="2"/>
+                        </g>
+
+                        <!-- Libro 2 - Naranja -->
+                        <g class="libro libro2">
+                            <rect x="200" y="80" width="80" height="140" fill="#FF9F43" rx="5" ry="5"/>
+                            <rect x="210" y="95" width="60" height="110" fill="#FFB366" rx="3" ry="3"/>
+                            <circle cx="240" cy="115" r="4" fill="#ff8c3a"/>
+                            <circle cx="255" cy="135" r="4" fill="#ff8c3a"/>
+                            <circle cx="240" cy="155" r="4" fill="#ff8c3a"/>
+                        </g>
+
+                        <!-- Libro 3 - Púrpura -->
+                        <g class="libro libro3">
+                            <rect x="320" y="120" width="75" height="130" fill="#9B59B6" rx="5" ry="5"/>
+                            <rect x="330" y="135" width="55" height="100" fill="#b375d4" rx="3" ry="3"/>
+                            <line x1="330" y1="155" x2="385" y2="155" stroke="#9B59B6" stroke-width="2"/>
+                            <line x1="330" y1="175" x2="385" y2="175" stroke="#9B59B6" stroke-width="2"/>
+                        </g>
+
+                        <!-- Libro 4 - Rojo -->
+                        <g class="libro libro4">
+                            <rect x="140" y="250" width="70" height="125" fill="#E74C3C" rx="5" ry="5"/>
+                            <rect x="150" y="265" width="50" height="95" fill="#f1694f" rx="3" ry="3"/>
+                        </g>
+
+                        <!-- Libro 5 - Verde -->
+                        <g class="libro libro5">
+                            <rect x="260" y="270" width="75" height="120" fill="#27AE60" rx="5" ry="5"/>
+                            <rect x="270" y="285" width="55" height="90" fill="#48c976" rx="3" ry="3"/>
+                            <line x1="270" y1="305" x2="325" y2="305" stroke="#27AE60" stroke-width="2"/>
+                            <line x1="270" y1="330" x2="325" y2="330" stroke="#27AE60" stroke-width="2"/>
+                        </g>
+
+                        <!-- Corazón flotante -->
+                        <g class="elemento elemento-corazon">
+                            <path d="M250 100 C250 85, 265 75, 275 75 C285 75, 295 85, 295 100 C295 125, 275 145, 275 145 C275 145, 255 125, 255 100 Z" fill="#FF6B9D"/>
+                        </g>
+
+                        <!-- Estrella flotante -->
+                        <g class="elemento elemento-estrella">
+                            <polygon points="400,200 410,230 442,230 418,255 428,285 400,260 372,285 382,255 358,230 390,230" fill="#FFD700"/>
+                        </g>
+
+                        <!-- Lupa -->
+                        <g class="elemento elemento-lupa">
+                            <circle cx="100" cy="380" r="25" fill="none" stroke="#4A90E2" stroke-width="3"/>
+                            <line x1="120" y1="400" x2="145" y2="425" stroke="#4A90E2" stroke-width="3" stroke-linecap="round"/>
+                        </g>
+
+                        <!-- Bookmark -->
+                        <g class="elemento elemento-bookmark">
+                            <rect x="420" y="150" width="15" height="80" fill="#E74C3C" rx="2" ry="2"/>
+                            <polygon points="420,230 427.5,220 435,230" fill="#E74C3C"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
         </section>
 
-        <section class="featured-books">
-            <h2>Libros Destacados</h2>
-            <div id="books-grid" class="books-grid">
-                <!-- Se llenará dinámicamente con JavaScript -->
+        <section class="seccion-destacados">
+            <div class="encabezado-seccion">
+                <h2>Libros Destacados</h2>
+                <p>Selección de los libros más populares disponibles en nuestro catálogo</p>
+            </div>
+            <div id="cuadricula-libros" class="cuadricula-libros">
+                <div class="cargando">
+                    <div class="spinner"></div>
+                    <p>Cargando libros...</p>
+                </div>
             </div>
         </section>
     </main>
 
+    <footer class="pie-sitio">
+        <div class="contenido-footer">
+            <p>&copy; 2025 LeeSmart - Plataforma de Lectura Digital</p>
+        </div>
+    </footer>
+
+    <script src="js/modal.js"></script>
     <script src="js/api-client.js"></script>
     <script src="js/app.js"></script>
 </body>

@@ -1,156 +1,227 @@
-// app.js - Lógica de la página de inicio
+/**
+ * Aplicación Gestor de Libros v2.0
+ * Orientada a objetos con uso completo del DOM
+ */
 
-document.addEventListener('DOMContentLoaded', async () => {
-    actualizarEncabezado();
-    await cargarLibrosDestacados();
-});
+class GestorLibros {
+    constructor() {
+        this.token = localStorage.getItem('token');
+        this.usuario = null;
+        this.libros = [];
+        this.elementos = {
+            infoUsuario: document.getElementById('info-usuario'),
+            enlaceLogin: document.getElementById('enlace-login'),
+            enlaceRegistro: document.getElementById('enlace-registro'),
+            botonCerrarSesion: document.getElementById('boton-cerrar-sesion'),
+            cuadriculaLibros: document.getElementById('cuadricula-libros')
+        };
 
-function actualizarEncabezado() {
-    const userInfo = document.getElementById('user-info');
-    const loginLink = document.getElementById('login-link');
-    const signupLink = document.getElementById('signup-link');
-    const logoutBtn = document.getElementById('logout-btn');
-
-    if (api.isAuthenticated()) {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        if (userInfo) {
-            userInfo.textContent = `Bienvenido, ${user.nombre || 'Usuario'}`;
-            userInfo.style.display = 'block';
-        }
-        if (loginLink) loginLink.style.display = 'none';
-        if (signupLink) signupLink.style.display = 'none';
-        if (logoutBtn) {
-            logoutBtn.style.display = 'inline-flex';
-            logoutBtn.addEventListener('click', manejarLogout);
-        }
-    } else {
-        if (userInfo) userInfo.style.display = 'none';
-        if (loginLink) loginLink.style.display = 'inline-flex';
-        if (signupLink) signupLink.style.display = 'inline-flex';
-        if (logoutBtn) logoutBtn.style.display = 'none';
+        this.inicializar();
     }
-}
 
-function manejarLogout() {
-    api.logout();
-    localStorage.removeItem('user');
-    window.location.href = 'index.html';
-}
+    inicializar() {
+        console.log('🚀 Inicializando Gestor de Libros v2.0');
 
-async function cargarLibrosDestacados() {
-    const container = document.getElementById('books-grid');
-    if (!container) return;
+        this.verificarAutenticacion();
+        this.configurarEventos();
 
-    try {
-        container.innerHTML = '<div class="loading">Cargando libros...</div>';
-        const data = await api.obtenerLibros({ destacados: true, limite: 6 });
-
-        if (data.error) {
-            mostrarError('Error al cargar libros: ' + data.error);
-            return;
+        if (this.elementos.cuadriculaLibros) {
+            this.cargarLibros();
         }
-
-        if (!data.libros || data.libros.length === 0) {
-            container.innerHTML = '<div class="empty-state"><h3>No hay libros disponibles</h3></div>';
-            return;
-        }
-
-        container.innerHTML = data.libros.map(libro => crearTarjetaLibro(libro)).join('');
-        agregarEventosAlquilar();
-    } catch (error) {
-        console.error('Error:', error);
-        mostrarError('Error al cargar libros');
     }
-}
 
-function crearTarjetaLibro(libro) {
-    return `
-        <div class="book-card">
-            <img src="${libro.portada_url || 'https://via.placeholder.com/200x250'}" alt="${libro.titulo}" class="book-cover">
-            <div class="book-info">
-                <div class="book-title">${libro.titulo}</div>
-                <div class="book-author">${libro.autor}</div>
-                <div class="book-year">${libro.anio_publicacion}</div>
-                ${libro.genero ? `<span class="book-genre">${libro.genero}</span>` : ''}
-                <button class="book-action" data-id="${libro.id}" data-title="${libro.titulo}">
-                    Alquilar
-                </button>
-            </div>
-        </div>
-    `;
-}
+    verificarAutenticacion() {
+        if (this.token) {
+            this.mostrarUsuarioAutenticado();
+        } else {
+            this.mostrarUsuarioNoAutenticado();
+        }
+    }
 
-function agregarEventosAlquilar() {
-    document.querySelectorAll('.book-action').forEach(btn => {
-        btn.addEventListener('click', function() {
-            if (!api.isAuthenticated()) {
-                window.location.href = 'login.html';
-                return;
+    mostrarUsuarioAutenticado() {
+        this.elementos.enlaceLogin.style.display = 'none';
+        this.elementos.enlaceRegistro.style.display = 'none';
+        this.elementos.botonCerrarSesion.style.display = 'block';
+        this.elementos.infoUsuario.style.display = 'inline';
+        this.elementos.infoUsuario.textContent = '✓ Bienvenido';
+        this.elementos.infoUsuario.classList.add('usuario-autenticado');
+    }
+
+    mostrarUsuarioNoAutenticado() {
+        this.elementos.enlaceLogin.style.display = 'inline-flex';
+        this.elementos.enlaceRegistro.style.display = 'inline-flex';
+        this.elementos.botonCerrarSesion.style.display = 'none';
+        this.elementos.infoUsuario.style.display = 'none';
+    }
+
+    configurarEventos() {
+        if (this.elementos.botonCerrarSesion) {
+            this.elementos.botonCerrarSesion.addEventListener('click',
+                (e) => this.cerrarSesion(e)
+            );
+        }
+    }
+
+    cerrarSesion(evento) {
+        evento.preventDefault();
+        localStorage.removeItem('token');
+        location.reload();
+    }
+
+    async cargarLibros() {
+        try {
+            this.mostrarCargando();
+            const datos = await ClienteAPI.obtenerLibros();
+
+            if (datos.success && datos.libros) {
+                this.libros = datos.libros.slice(0, 6);
+                this.mostrarLibros();
+            } else {
+                this.mostrarError('No se pudieron cargar los libros');
             }
-            const libroId = this.getAttribute('data-id');
-            const titulo = this.getAttribute('data-title');
-            abrirDialogoAlquiler(libroId, titulo);
-        });
-    });
-}
-
-function abrirDialogoAlquiler(libroId, titulo) {
-    const dias = prompt(`¿Por cuántos días deseas alquilar "${titulo}"?\n(Máximo 30 días)`, '7');
-
-    if (dias === null) return;
-
-    const diasNum = parseInt(dias);
-    if (isNaN(diasNum) || diasNum < 1 || diasNum > 30) {
-        alert('Ingresa un número entre 1 y 30');
-        return;
+        } catch (error) {
+            console.error('Error al cargar libros:', error);
+            this.mostrarError('Error de conexión');
+        }
     }
 
-    alquilarLibro(libroId, diasNum);
+    mostrarCargando() {
+        this.elementos.cuadriculaLibros.innerHTML = '';
+
+        const contenedor = document.createElement('div');
+        contenedor.className = 'cargando';
+        contenedor.innerHTML = `
+            <div class="spinner-carga"></div>
+            <p>Cargando libros...</p>
+        `;
+
+        this.elementos.cuadriculaLibros.appendChild(contenedor);
+    }
+
+    mostrarError(mensaje) {
+        this.elementos.cuadriculaLibros.innerHTML = '';
+
+        const div = document.createElement('div');
+        div.className = 'error';
+        div.textContent = mensaje;
+
+        this.elementos.cuadriculaLibros.appendChild(div);
+    }
+
+    mostrarLibros() {
+        this.elementos.cuadriculaLibros.innerHTML = '';
+
+        this.libros.forEach(libro => {
+            const tarjeta = new TarjetaLibro(libro, this.token);
+            this.elementos.cuadriculaLibros.appendChild(tarjeta.elemento);
+        });
+    }
 }
 
-async function alquilarLibro(libroId, diasAlquiler) {
-    try {
-        const data = await api.alquilarLibro(libroId, diasAlquiler);
+/**
+ * Clase para representar una tarjeta de libro
+ */
+class TarjetaLibro {
+    constructor(libro, token) {
+        this.libro = libro;
+        this.token = token;
+        this.elemento = this.crear();
+    }
 
-        if (data.error) {
-            mostrarError('Error: ' + data.error);
+    crear() {
+        const contenedor = document.createElement('div');
+        contenedor.className = 'tarjeta-libro';
+
+        // Crear portada
+        const portada = this.crearPortada();
+
+        // Crear información
+        const info = this.crearInfo();
+
+        // Crear botón
+        const boton = this.crearBoton();
+
+        contenedor.appendChild(portada);
+        contenedor.appendChild(info);
+        contenedor.appendChild(boton);
+
+        return contenedor;
+    }
+
+    crearPortada() {
+        const img = document.createElement('img');
+        img.src = this.libro.portada_url;
+        img.alt = this.libro.titulo;
+        img.className = 'portada-libro';
+        img.onerror = () => this.manejarErrorImagen(img);
+
+        return img;
+    }
+
+    manejarErrorImagen(img) {
+        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="300"%3E%3Crect fill="%23e0e0e0" width="200" height="300"/%3E%3Ctext x="50%" y="50%" text-anchor="middle" dy=".3em" fill="%23999"%3ELibro%3C/text%3E%3C/svg%3E';
+    }
+
+    crearInfo() {
+        const div = document.createElement('div');
+        div.className = 'info-libro';
+
+        // Título
+        const titulo = document.createElement('h3');
+        titulo.className = 'titulo-libro';
+        titulo.textContent = this.libro.titulo;
+
+        // Autor
+        const autor = document.createElement('p');
+        autor.className = 'autor-libro';
+        autor.textContent = this.libro.autor;
+
+        // Año
+        const anio = document.createElement('p');
+        anio.className = 'anio-libro';
+        anio.textContent = this.libro.anio_publicacion || 'Sin año';
+
+        // Género
+        const genero = document.createElement('span');
+        genero.className = 'genero-libro';
+        genero.textContent = this.libro.genero;
+
+        div.appendChild(titulo);
+        div.appendChild(autor);
+        div.appendChild(anio);
+        div.appendChild(genero);
+
+        return div;
+    }
+
+    crearBoton() {
+        const boton = document.createElement('button');
+        boton.className = 'accion-libro';
+        boton.textContent = 'Alquilar';
+        boton.setAttribute('aria-label', `Alquilar ${this.libro.titulo}`);
+
+        boton.addEventListener('click', (e) => this.manejarAlquiler(e));
+
+        return boton;
+    }
+
+    manejarAlquiler(evento) {
+        evento.preventDefault();
+
+        if (!this.token) {
+            window.location.href = 'login.html';
             return;
         }
 
-        mostrarExito('Libro alquilado exitosamente');
-        setTimeout(() => {
-            window.location.href = 'biblioteca.html';
-        }, 1500);
-    } catch (error) {
-        console.error('Error:', error);
-        mostrarError('Error al alquilar libro');
+        // Guardar datos en sessionStorage para la siguiente página
+        sessionStorage.setItem('libro-seleccionado', JSON.stringify(this.libro));
+        window.location.href = 'libros.html?alquilar=' + this.libro.id;
     }
 }
 
-function mostrarError(mensaje) {
-    console.error(mensaje);
-    const notif = document.createElement('div');
-    notif.className = 'error';
-    notif.textContent = mensaje;
-    notif.style.position = 'fixed';
-    notif.style.top = '20px';
-    notif.style.right = '20px';
-    notif.style.zIndex = '9999';
-    notif.style.maxWidth = '400px';
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 5000);
-}
-
-function mostrarExito(mensaje) {
-    console.log(mensaje);
-    const notif = document.createElement('div');
-    notif.className = 'success';
-    notif.textContent = mensaje;
-    notif.style.position = 'fixed';
-    notif.style.top = '20px';
-    notif.style.right = '20px';
-    notif.style.zIndex = '9999';
-    notif.style.maxWidth = '400px';
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 5000);
-}
+/**
+ * Inicializar aplicación cuando el DOM esté listo
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    window.gestorLibros = new GestorLibros();
+});

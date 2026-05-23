@@ -88,28 +88,36 @@ function manejarLogout() {
 
 function mostrarError(mensaje) {
     console.error(mensaje);
-    const notif = document.createElement('div');
-    notif.className = 'error';
-    notif.textContent = mensaje;
-    notif.style.position = 'fixed';
-    notif.style.top = '20px';
-    notif.style.right = '20px';
-    notif.style.zIndex = '9999';
-    notif.style.maxWidth = '400px';
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 5000);
+    if (typeof modal !== 'undefined') {
+        modal.error('Error', mensaje);
+    } else {
+        const notif = document.createElement('div');
+        notif.className = 'error';
+        notif.textContent = mensaje;
+        notif.style.position = 'fixed';
+        notif.style.top = '20px';
+        notif.style.right = '20px';
+        notif.style.zIndex = '9999';
+        notif.style.maxWidth = '400px';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 5000);
+    }
 }
 
 function mostrarExito(mensaje) {
     console.log(mensaje);
-    const notif = document.createElement('div');
-    notif.className = 'success';
-    notif.textContent = mensaje;
-    notif.style.position = 'fixed';
-    notif.style.top = '20px';
-    notif.style.right = '20px';
-    notif.style.zIndex = '9999';
-    notif.style.maxWidth = '400px';
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 5000);
+    if (typeof modal !== 'undefined') {
+        modal.success('Éxito', mensaje);
+    } else {
+        const notif = document.createElement('div');
+        notif.className = 'success';
+        notif.textContent = mensaje;
+        notif.style.position = 'fixed';
+        notif.style.top = '20px';
+        notif.style.right = '20px';
+        notif.style.zIndex = '9999';
+        notif.style.maxWidth = '400px';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 5000);
+    }
 }

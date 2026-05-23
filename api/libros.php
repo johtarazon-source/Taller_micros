@@ -158,15 +158,4 @@ function handleCrearLibro($conn) {
         echo json_encode(['error' => 'Error al crear libro']);
     }
 }
-
-function getToken() {
-    $headers = getallheaders();
-    if (isset($headers['Authorization'])) {
-        $matches = [];
-        if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
-            return $matches[1];
-        }
-    }
-    return $_SESSION['token'] ?? null;
-}
 ?>

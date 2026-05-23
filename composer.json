@@ -1,0 +1,15 @@
+{
+    "name": "bookhub/api",
+    "type": "project",
+    "authors": [
+        {
+            "name": "johtarazon-source",
+            "email": "johtarazona@uniboyaca.edu.co"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "guzzlehttp/guzzle": "^7.10",
+        "symfony/var-dumper": "^7.4"
+    }
+}

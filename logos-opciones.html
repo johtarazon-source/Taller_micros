@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones de Logo - Plataforma de Libros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-display {
+            width: 100%;
+            height: 250px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .logo-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .logo-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .logo-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .logo-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .logo-tagline {
+            font-size: 0.95rem;
+            color: #999;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .logo-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .logo-features {
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-icon {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-select {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-select:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-preview {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-preview:hover {
+            background: #f8f9ff;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Opciones de Logo</h1>
+        <p>Elige el nombre y diseño perfecto para tu plataforma de alquiler de libros</p>
+    </div>
+
+    <div class="container">
+        <!-- OPCIÓN 1: LECTORIA -->
+        <div class="logo-card">
+            <div class="recommendation">⭐ RECOMENDADO</div>
+            <div class="logo-display logo-1">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 180px; height: 180px;">
+                    <defs>
+                        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Libro abierto -->
+                    <path d="M 50 80 L 50 140 Q 50 150 60 150 L 100 150 Q 110 150 110 140 L 110 80 Z" fill="url(#g1)" opacity="0.9"/>
+                    <path d="M 100 80 L 100 140 Q 100 150 90 150 L 50 150 Q 40 150 40 140 L 40 80 Z" fill="url(#g1)"/>
+
+                    <!-- Páginas -->
+                    <line x1="60" y1="95" x2="95" y2="95" stroke="white" stroke-width="2" opacity="0.6"/>
+                    <line x1="60" y1="110" x2="95" y2="110" stroke="white" stroke-width="2" opacity="0.6"/>
+                    <line x1="60" y1="125" x2="95" y2="125" stroke="white" stroke-width="2" opacity="0.6"/>
+
+                    <!-- Marca de lectura -->
+                    <circle cx="100" cy="50" r="12" fill="#fbbf24"/>
+                    <line x1="100" y1="62" x2="100" y2="75" stroke="#fbbf24" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="logo-name">LECTORIA</div>
+            <div class="logo-tagline">El mundo de la lectura en tus manos</div>
+            <div class="logo-description">
+                Nombre moderno y sofisticado que combina "lector" con un toque de elegancia. Evoca inmediatamente una plataforma dedicada a la lectura.
+            </div>
+            <div class="logo-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✨</span>
+                    <span>Nombre profesional y único</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📚</span>
+                    <span>Fácil de recordar</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>Dominio disponible (.com)</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌍</span>
+                    <span>Significado en español claro</span>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-select" onclick="seleccionar('LECTORIA')">Seleccionar</button>
+                <button class="btn btn-preview" onclick="mostrarDetalle('LECTORIA')">Ver Detalle</button>
+            </div>
+        </div>
+
+        <!-- OPCIÓN 2: PAGINAL -->
+        <div class="logo-card">
+            <div class="logo-display logo-2">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 180px; height: 180px;">
+                    <defs>
+                        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Tres libros apilados -->
+                    <rect x="50" y="120" width="50" height="30" rx="3" fill="url(#g2)" opacity="0.8"/>
+                    <rect x="45" y="100" width="55" height="30" rx="3" fill="url(#g2)" opacity="0.9"/>
+                    <rect x="40" y="80" width="60" height="30" rx="3" fill="url(#g2)"/>
+
+                    <!-- Líneas de páginas -->
+                    <line x1="55" y1="90" x2="85" y2="90" stroke="white" stroke-width="1.5" opacity="0.5"/>
+                    <line x1="55" y1="100" x2="85" y2="100" stroke="white" stroke-width="1.5" opacity="0.5"/>
+
+                    <!-- Estrella -->
+                    <polygon points="100,50 105,65 121,65 108,75 113,90 100,80 87,90 92,75 79,65 95,65" fill="#fbbf24"/>
+                </svg>
+            </div>
+            <div class="logo-name">PAGINAL</div>
+            <div class="logo-tagline">Tu destino en cada página</div>
+            <div class="logo-description">
+                Nombre dinámico y joven que sugiere movimiento a través de páginas. Perfecto para una plataforma activa y en constante crecimiento.
+            </div>
+            <div class="logo-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✨</span>
+                    <span>Nombre corto y pegadizo</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📚</span>
+                    <span>Fácil de pronunciar</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>Amigable y accesible</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚀</span>
+                    <span>Conexión con movimiento</span>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-select" onclick="seleccionar('PAGINAL')">Seleccionar</button>
+                <button class="btn btn-preview" onclick="mostrarDetalle('PAGINAL')">Ver Detalle</button>
+            </div>
+        </div>
+
+        <!-- OPCIÓN 3: LIBRANZA -->
+        <div class="logo-card">
+            <div class="logo-display logo-3">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 180px; height: 180px;">
+                    <defs>
+                        <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Mano sosteniendo libro -->
+                    <path d="M 60 120 L 60 100 L 70 85 L 80 85 L 80 120 Z" fill="url(#g3)" opacity="0.8"/>
+                    <circle cx="65" cy="125" r="5" fill="url(#g3)"/>
+
+                    <!-- Libro en la mano -->
+                    <rect x="75" y="80" width="55" height="45" rx="3" fill="url(#g3)"/>
+                    <line x1="85" y1="95" x2="120" y2="95" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="85" y1="108" x2="120" y2="108" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                    <line x1="85" y1="121" x2="120" y2="121" stroke="white" stroke-width="1.5" opacity="0.6"/>
+
+                    <!-- Corazón -->
+                    <path d="M 140 65 Q 145 60 150 60 Q 155 60 158 65 Q 155 70 150 75 Q 145 70 140 65" fill="#fbbf24"/>
+                </svg>
+            </div>
+            <div class="logo-name">LIBRANZA</div>
+            <div class="logo-tagline">Libertad de leer sin límites</div>
+            <div class="logo-description">
+                Nombre poético que combina "libro" con "esperanza". Transmite la idea de acceso ilimitado a la lectura y la libertad de explorar nuevas historias.
+            </div>
+            <div class="logo-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✨</span>
+                    <span>Nombre poético y memorable</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📚</span>
+                    <span>Evoca esperanza y libertad</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <span>Diferenciador único</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">❤️</span>
+                    <span>Conexión emocional fuerte</span>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-select" onclick="seleccionar('LIBRANZA')">Seleccionar</button>
+                <button class="btn btn-preview" onclick="mostrarDetalle('LIBRANZA')">Ver Detalle</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function seleccionar(nombre) {
+            alert(`¡Excelente! Has seleccionado: ${nombre}\n\nEl sitio será renombrado a ${nombre} en todos los archivos.`);
+            // Aquí iría la lógica para cambiar el nombre en la base de datos
+            console.log(`Nombre seleccionado: ${nombre}`);
+        }
+
+        function mostrarDetalle(nombre) {
+            const detalles = {
+                'LECTORIA': {
+                    desc: 'LECTORIA: El nombre perfecto para una plataforma de lectura\n\n✨ Derivado de "Lector"\n📚 Transmite profesionalismo\n🎯 Fácil de recordar\n🌍 Disponible en dominios globales\n\nColores: Púrpura y Rosa (gradiente elegante)\nTema: Sofisticación y autoridad en lectura',
+                    pagina: 'lectoria.html'
+                },
+                'PAGINAL': {
+                    desc: 'PAGINAL: Para los amantes del viaje literario\n\n✨ Corto y pegadizo\n📚 Sugiere movimiento entre páginas\n🎯 Accesible a todas las edades\n🚀 Dinámico y moderno\n\nColores: Púrpura Oscuro (gradiente profesional)\nTema: Movimiento, dinamismo, descubrimiento',
+                    pagina: 'paginal.html'
+                },
+                'LIBRANZA': {
+                    desc: 'LIBRANZA: La libertad de leer\n\n✨ Poético y memorable\n📚 Combina "Libro" + "Esperanza"\n🎯 Diferenciador único en el mercado\n❤️ Conexión emocional profunda\n\nColores: Rosa-Magenta (gradiente vibrante)\nTema: Libertad, esperanza, acceso ilimitado',
+                    pagina: 'libranza.html'
+                }
+            };
+
+            alert(detalles[nombre].desc);
+        }
+    </script>
+</body>
+</html>

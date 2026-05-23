@@ -1,107 +1,156 @@
-// biblioteca.js - Lógica para la página de mi biblioteca
+class GestorBiblioteca {
+  constructor() {
+    this.token = localStorage.getItem('token');
+    this.usuario = localStorage.getItem('usuario');
+    this.alquileres = [];
 
-document.addEventListener('DOMContentLoaded', async () => {
-    if (!api.isAuthenticated()) {
-        window.location.href = 'login.html';
-        return;
+    this.elementos = {
+      infoUsuario: document.getElementById('info-usuario'),
+      enlaceLogin: document.getElementById('enlace-login'),
+      enlaceRegistro: document.getElementById('enlace-registro'),
+      botonLogout: document.getElementById('boton-cerrar-sesion'),
+      listaAlquileres: document.getElementById('lista-alquileres')
+    };
+
+    if (!this.token) {
+      this.redirigirALogin();
+      return;
     }
 
-    await cargarAlquileres();
-});
+    this.inicializar();
+  }
 
-async function cargarAlquileres() {
-    const container = document.getElementById('rentals-list');
-    if (!container) return;
-
-    try {
-        container.innerHTML = '<div class="loading">Cargando tus alquileres...</div>';
-        const data = await api.obtenerMisAlquileres();
-
-        if (data.error) {
-            mostrarError('Error: ' + data.error);
-            return;
-        }
-
-        if (!data.alquileres || data.alquileres.length === 0) {
-            container.innerHTML = '<div class="empty-state"><h3>No tienes libros alquilados</h3><p>Explora nuestra colección para alquilar libros</p></div>';
-            return;
-        }
-
-        container.innerHTML = data.alquileres.map(alquiler => crearTarjetaAlquiler(alquiler)).join('');
-        agregarEventosDevolver();
-    } catch (error) {
-        console.error('Error:', error);
-        mostrarError('Error al cargar alquileres');
-    }
-}
-
-function crearTarjetaAlquiler(alquiler) {
-    const fechaFin = new Date(alquiler.fecha_vencimiento);
-    const hoy = new Date();
-    const diasRestantes = Math.ceil((fechaFin - hoy) / (1000 * 60 * 60 * 24));
-    const vencido = diasRestantes < 0;
-
-    return `
-        <div class="rental-card">
-            <img src="${alquiler.portada_url || 'https://via.placeholder.com/100x150'}" alt="${alquiler.titulo}" class="rental-cover">
-            <div class="rental-details">
-                <div class="rental-title">${alquiler.titulo}</div>
-                <div class="rental-info">Autor: ${alquiler.autor}</div>
-                <div class="rental-info">Género: ${alquiler.genero}</div>
-                <div class="rental-date">
-                    Alquilado el: ${new Date(alquiler.fecha_inicio).toLocaleDateString()}
-                </div>
-                <div class="rental-date" style="${vencido ? 'color: #e74c3c; font-weight: 600;' : ''}">
-                    ${vencido ? 'VENCIDO' : `Vencimiento: ${fechaFin.toLocaleDateString()} (${diasRestantes} días restantes)`}
-                </div>
-                <div class="rental-actions">
-                    <button class="btn-return" data-id="${alquiler.id}">Devolver</button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function agregarEventosDevolver() {
-    document.querySelectorAll('.btn-return').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const alquilerId = this.getAttribute('data-id');
-            confirmarDevolucion(alquilerId);
-        });
+  redirigirALogin() {
+    modal.info('Acceso Denegado', 'Debes iniciar sesión para acceder a tu biblioteca', () => {
+      window.location.href = 'login.html';
     });
-}
+  }
 
-function confirmarDevolucion(alquilerId) {
-    if (confirm('¿Estás seguro de que deseas devolver este libro?')) {
-        devolverLibro(alquilerId);
+  inicializar() {
+    this.actualizarAutenticacion();
+    this.configurarEventos();
+    this.cargarAlquileres();
+  }
+
+  actualizarAutenticacion() {
+    if (this.token && this.usuario) {
+      if (this.elementos.infoUsuario) this.elementos.infoUsuario.style.display = 'inline';
+      if (this.elementos.infoUsuario) this.elementos.infoUsuario.textContent = '👤 ' + this.usuario;
+      if (this.elementos.enlaceLogin) this.elementos.enlaceLogin.style.display = 'none';
+      if (this.elementos.enlaceRegistro) this.elementos.enlaceRegistro.style.display = 'none';
+      if (this.elementos.botonLogout) this.elementos.botonLogout.style.display = 'inline-block';
     }
-}
+  }
 
-async function devolverLibro(alquilerId) {
-    try {
-        const data = await api.devolverLibro(alquilerId);
-
-        if (data.error) {
-            mostrarError('Error: ' + data.error);
-            return;
-        }
-
-        mostrarExito('Libro devuelto exitosamente');
-        setTimeout(() => {
-            cargarAlquileres();
-        }, 1000);
-    } catch (error) {
-        console.error('Error:', error);
-        mostrarError('Error al devolver libro');
+  configurarEventos() {
+    if (this.elementos.botonLogout) {
+      this.elementos.botonLogout.addEventListener('click', () => this.cerrarSesion());
     }
+  }
+
+  cargarAlquileres() {
+    const alquileres = localStorage.getItem('alquileres');
+    this.alquileres = alquileres ? JSON.parse(alquileres) : [];
+    this.mostrarAlquileres();
+  }
+
+  mostrarAlquileres() {
+    const lista = this.elementos.listaAlquileres;
+    if (!lista) return;
+
+    while (lista.firstChild) {
+      lista.removeChild(lista.firstChild);
+    }
+
+    if (this.alquileres.length === 0) {
+      const vacio = document.createElement('div');
+      vacio.className = 'estado-vacio';
+      vacio.textContent = 'No tienes libros alquilados. ¡Ve a descubrir libros!';
+      lista.appendChild(vacio);
+      return;
+    }
+
+    this.alquileres.forEach((alquiler, indice) => {
+      const tarjeta = this.crearTarjetaAlquiler(alquiler, indice);
+      lista.appendChild(tarjeta);
+    });
+  }
+
+  crearTarjetaAlquiler(alquiler, indice) {
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta-alquiler';
+
+    const titulo = document.createElement('h3');
+    titulo.textContent = alquiler.titulo;
+
+    const autor = document.createElement('p');
+    autor.className = 'autor-alquiler';
+    autor.textContent = 'Por ' + alquiler.autor;
+
+    const info = document.createElement('div');
+    info.className = 'info-alquiler';
+
+    const dias = document.createElement('span');
+    dias.textContent = 'Días: ' + alquiler.dias;
+
+    const precio = document.createElement('span');
+    precio.className = 'precio-alquiler';
+    precio.textContent = '$' + this.formatearPrecio(alquiler.precio_total);
+
+    info.appendChild(dias);
+    info.appendChild(precio);
+
+    const fechas = document.createElement('div');
+    fechas.className = 'fechas-alquiler';
+
+    const fechaAlquiler = document.createElement('p');
+    fechaAlquiler.textContent = 'Alquiler: ' + alquiler.fecha_alquiler;
+
+    const fechaEntrega = document.createElement('p');
+    fechaEntrega.className = 'fecha-entrega';
+    fechaEntrega.textContent = 'Entrega: ' + alquiler.fecha_entrega;
+
+    fechas.appendChild(fechaAlquiler);
+    fechas.appendChild(fechaEntrega);
+
+    const boton = document.createElement('button');
+    boton.className = 'boton boton-peligro';
+    boton.textContent = 'Devolver libro';
+    boton.addEventListener('click', () => this.devolverLibro(indice));
+
+    tarjeta.appendChild(titulo);
+    tarjeta.appendChild(autor);
+    tarjeta.appendChild(info);
+    tarjeta.appendChild(fechas);
+    tarjeta.appendChild(boton);
+
+    return tarjeta;
+  }
+
+  devolverLibro(indice) {
+    const alquiler = this.alquileres[indice];
+    modal.confirm('Confirmar Devolución', '¿Deseas devolver "' + alquiler.titulo + '"?', () => {
+      this.alquileres.splice(indice, 1);
+      localStorage.setItem('alquileres', JSON.stringify(this.alquileres));
+      this.mostrarAlquileres();
+      modal.success('Éxito', 'Libro devuelto exitosamente');
+    });
+  }
+
+  formatearPrecio(precio) {
+    if (typeof precio === 'string') {
+      precio = parseFloat(precio);
+    }
+    return precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    window.location.href = 'index.html';
+  }
 }
 
-function mostrarError(mensaje) {
-    console.error(mensaje);
-    alert(mensaje);
-}
-
-function mostrarExito(mensaje) {
-    console.log(mensaje);
-    alert(mensaje);
-}
+document.addEventListener('DOMContentLoaded', () => {
+  new GestorBiblioteca();
+});

@@ -141,14 +141,4 @@ function handleGetPerfil($conn) {
     echo json_encode(['success' => true, 'user' => $user]);
 }
 
-function getToken() {
-    $headers = getallheaders();
-    if (isset($headers['Authorization'])) {
-        $matches = [];
-        if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
-            return $matches[1];
-        }
-    }
-    return $_SESSION['token'] ?? null;
-}
 ?>

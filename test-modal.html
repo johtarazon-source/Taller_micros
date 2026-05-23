@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Test Modales - LeeSmart</title>
+</head>
+<body>
+    <header class="encabezado-sitio">
+        <a href="index.html" class="marca" aria-label="Inicio">
+            <svg class="logo-libro" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="30" height="60" fill="#4A90E2" rx="3"/>
+                <rect x="50" y="20" width="30" height="60" fill="#9B59B6" rx="3"/>
+                <line x1="50" y1="20" x2="50" y2="80" stroke="#fff" stroke-width="2"/>
+                <line x1="25" y1="35" x2="45" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="45" x2="45" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="55" x2="45" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="35" x2="75" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="45" x2="75" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="55" x2="75" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+            </svg>
+            <span class="marca-titulo">LeeSmart</span>
+        </a>
+    </header>
+
+    <main class="contenedor-principal" style="text-align: center; padding: 4rem 2rem;">
+        <h1>Test de Modales</h1>
+        <p>Prueba los diferentes tipos de modales personalizados</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <button class="boton boton-primario" onclick="modal.info('Información', 'Este es un modal de información con diseño personalizado.')">
+                Info Modal
+            </button>
+
+            <button class="boton boton-peligro" onclick="modal.error('Error', 'Este es un modal de error con icono personalizado.')">
+                Error Modal
+            </button>
+
+            <button class="boton boton-terciario" onclick="modal.success('Éxito', 'Este es un modal de éxito con animación.')">
+                Success Modal
+            </button>
+
+            <button class="boton boton-secundario" onclick="modal.warning('Advertencia', 'Este es un modal de advertencia.')">
+                Warning Modal
+            </button>
+
+            <button class="boton boton-primario" onclick="testConfirm()">
+                Confirm Modal
+            </button>
+
+            <button class="boton boton-primario" onclick="testPrompt()">
+                Prompt Modal
+            </button>
+        </div>
+    </main>
+
+    <footer class="pie-sitio">
+        <div class="contenido-footer">
+            <p>&copy; 2025 LeeSmart - Plataforma de Lectura Digital</p>
+        </div>
+    </footer>
+
+    <script src="js/modal.js"></script>
+    <script>
+        function testConfirm() {
+            modal.confirm('Confirmar Acción', '¿Deseas continuar con esta acción?',
+                () => modal.success('Confirmado', 'Has confirmado la acción'),
+                () => modal.info('Cancelado', 'Has cancelado la acción')
+            );
+        }
+
+        function testPrompt() {
+            modal.prompt('Ingresa tu nombre', 'Por favor, escribe tu nombre:', 'Usuario', (nombre) => {
+                if (nombre) {
+                    modal.success('Bienvenida', '¡Hola ' + nombre + '! Bienvenido a LeeSmart');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

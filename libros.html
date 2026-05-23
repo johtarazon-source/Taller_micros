@@ -4,62 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos.css">
-    <title>Libros - Gestor de Libros</title>
+    <title>Descubrir Libros - LeeSmart</title>
 </head>
 <body>
-    <header class="site-header">
-        <a href="index.html" class="brand" aria-label="Inicio">
-            <img class="logo" src="https://images.vexels.com/media/users/3/229082/isolated/preview/6fabc24c3830d75486725cc6d786dfbb-logotipo-de-circulos-de-libro.png" alt="Logo">
+    <header class="encabezado-sitio">
+        <a href="index.html" class="marca" aria-label="Inicio">
+            <svg class="logo-libro" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="30" height="60" fill="#4A90E2" rx="3"/>
+                <rect x="50" y="20" width="30" height="60" fill="#9B59B6" rx="3"/>
+                <line x1="50" y1="20" x2="50" y2="80" stroke="#fff" stroke-width="2"/>
+                <line x1="25" y1="35" x2="45" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="45" x2="45" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="25" y1="55" x2="45" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="35" x2="75" y2="35" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="45" x2="75" y2="45" stroke="#fff" stroke-width="1" opacity="0.7"/>
+                <line x1="55" y1="55" x2="75" y2="55" stroke="#fff" stroke-width="1" opacity="0.7"/>
+            </svg>
+            <span class="marca-titulo">LeeSmart</span>
         </a>
 
-        <nav class="main-nav" aria-label="Principal">
-            <ul class="nav-links">
-                <li>
-                    <a href="index.html">Inicio</a>
-                </li>
-                <li>
-                    <a href="libros.html" class="active">Descubrir</a>
-                </li>
-                <li>
-                    <a href="generos.html">Géneros</a>
-                </li>
-                <li>
-                    <a href="biblioteca.html">Mi Biblioteca</a>
-                </li>
+        <nav class="navegacion-principal" aria-label="Principal">
+            <ul class="enlaces-nav">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="libros.html" class="enlace-activo">Descubrir</a></li>
+                <li><a href="generos.html">Géneros</a></li>
+                <li><a href="biblioteca.html">Mi Biblioteca</a></li>
             </ul>
         </nav>
 
-        <div class="header-actions">
-            <span id="user-info" style="color: #ffffff; margin-right: 1rem; display: none;"></span>
-            <a href="login.html" id="login-link" class="btn btn-login">Iniciar sesión</a>
-            <a href="registro.html" id="signup-link" class="btn btn-signup">Registrarse</a>
-            <button id="logout-btn" class="btn btn-logout" style="display: none;">Cerrar sesión</button>
+        <div class="acciones-encabezado">
+            <span id="info-usuario" class="info-usuario"></span>
+            <a href="login.html" id="enlace-login" class="boton boton-primario">Iniciar sesión</a>
+            <a href="registro.html" id="enlace-registro" class="boton boton-secundario">Registrarse</a>
+            <button id="boton-cerrar-sesion" class="boton boton-peligro" style="display: none;">Cerrar sesión</button>
         </div>
     </header>
 
-    <main class="container">
-        <section class="books-section">
-            <h1>Todos los Libros</h1>
+    <main class="contenedor-principal">
+        <!-- Sección Hero con Búsqueda -->
+        <section class="seccion-busqueda-hero">
+            <div class="contenido-busqueda">
+                <div class="texto-busqueda">
+                    <h1>Descubre tu Próximo Libro Favorito</h1>
+                    <p>Acceso a miles de libros, alquila tus favoritos y gestiona tu biblioteca personal de forma fácil y rápida.</p>
 
-            <div class="filters">
-                <input type="text" id="search-books" class="search-input" placeholder="Buscar libros...">
-                <select id="sort-books" class="sort-select">
-                    <option value="titulo">Ordenar por título</option>
-                    <option value="autor">Ordenar por autor</option>
-                    <option value="anio">Ordenar por año</option>
-                </select>
+                    <div class="controles-busqueda">
+                        <input type="text" id="buscar-libros" class="entrada-busqueda" placeholder="Buscar libros por título o autor...">
+                        <select id="ordenar-libros" class="selector-orden">
+                            <option value="titulo">Ordenar por título</option>
+                            <option value="autor">Ordenar por autor</option>
+                            <option value="anio">Ordenar por año</option>
+                            <option value="precio">Ordenar por precio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="imagen-busqueda">
+                    <div class="libreria-imagen"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Libros -->
+        <section class="seccion-libros">
+            <div class="encabezado-libros">
+                <h2>Catálogo Completo</h2>
+                <p id="contador-libros" class="texto-secundario">Cargando libros...</p>
             </div>
 
-            <div id="books-grid" class="books-grid">
-                <!-- Se llenará dinámicamente con JavaScript -->
+            <div id="cuadricula-libros" class="cuadricula-libros">
+                <div class="cargando">
+                    <div class="spinner"></div>
+                    <p>Cargando libros...</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2025 Gestor de Libros. Todos los derechos reservados.</p>
+    <footer class="pie-sitio">
+        <div class="contenido-footer">
+            <p>&copy; 2025 LeeSmart - Plataforma de Lectura Digital</p>
+        </div>
     </footer>
 
+    <script src="js/modal.js"></script>
     <script src="js/api-client.js"></script>
     <script src="js/libros.js"></script>
 </body>

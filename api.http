@@ -1,0 +1,213 @@
+### Registrar nuevo usuario
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=registro
+Content-Type: application/json
+
+{
+    "nombre": "Juan Pérez",
+    "email": "juan@example.com",
+    "password": "password123"
+}
+
+### Registrar otro usuario
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=registro
+Content-Type: application/json
+
+{
+    "nombre": "María García",
+    "email": "maria@example.com",
+    "password": "securepass456"
+}
+
+### Login - Obtener token
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=login
+Content-Type: application/json
+
+{
+    "email": "juan@example.com",
+    "password": "password123"
+}
+
+### Login - Usuario incorrecto
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=login
+Content-Type: application/json
+
+{
+    "email": "noexiste@example.com",
+    "password": "wrongpass"
+}
+
+### Login - Contraseña incorrecta
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=login
+Content-Type: application/json
+
+{
+    "email": "juan@example.com",
+    "password": "wrongpassword"
+}
+
+### Obtener perfil del usuario (requiere token)
+GET http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=perfil
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+### ========================================
+### LIBROS - Catálogo
+### ========================================
+
+### Obtener lista de libros
+GET http://localhost/taller_micros/Taller_micros/api/libros.php
+
+### Obtener libros con límite personalizado
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?limite=5
+
+### Obtener libros destacados (aleatorios)
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?destacados=true
+
+### Obtener géneros disponibles
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=generos
+
+### Obtener libros por género - Ficción
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=porGenero&genero=Ficción
+
+### Obtener libros por género - Misterio
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=porGenero&genero=Misterio
+
+### Obtener libro específico por ID
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=obtener&id=1
+
+### Obtener libro que no existe
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=obtener&id=999
+
+### Crear nuevo libro
+POST http://localhost/taller_micros/Taller_micros/api/libros.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "titulo": "El Viaje Fantástico",
+    "autor": "Carlos Ruiz",
+    "anio_publicacion": 2023,
+    "genero": "Aventura",
+    "descripcion": "Una novela de aventura épica a través de mundos desconocidos",
+    "portada_url": "https://via.placeholder.com/300x400?text=Viaje+Fantastico"
+}
+
+### Obtener mis alquileres actuales
+GET http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=misos
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+### Obtener alquileres sin token (debe fallar)
+GET http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=misos
+
+### Crear nuevo alquiler - 7 días
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 1,
+    "dias_alquiler": 7
+}
+
+### Crear alquiler - 14 días
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 2,
+    "dias_alquiler": 14
+}
+
+### Crear alquiler - 30 días (máximo permitido)
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 3,
+    "dias_alquiler": 30
+}
+
+### Crear alquiler - Duración inválida (mayor a 30)
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 4,
+    "dias_alquiler": 45
+}
+
+### Crear alquiler - Libro no existe
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 999,
+    "dias_alquiler": 7
+}
+
+### Devolver libro (requiere token)
+PUT http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=devolver&id=1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+### Devolver alquiler que no existe
+PUT http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=devolver&id=999
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+### ========================================
+### CASOS DE ERROR - Validaciones
+### ========================================
+
+### Registro - Email faltante
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=registro
+Content-Type: application/json
+
+{
+    "nombre": "Test User",
+    "password": "password123"
+}
+
+### Registro - Contraseña faltante
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=registro
+Content-Type: application/json
+
+{
+    "nombre": "Test User",
+    "email": "test@example.com"
+}
+
+### Registro - Email duplicado
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=registro
+Content-Type: application/json
+
+{
+    "nombre": "Otro Juan",
+    "email": "juan@example.com",
+    "password": "password123"
+}
+
+### Alquiler - Datos inválidos
+POST http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+{
+    "libro_id": 0,
+    "dias_alquiler": 0
+}
+
+### Acción no válida en usuarios
+POST http://localhost/taller_micros/Taller_micros/api/usuarios.php?action=invalida
+Content-Type: application/json
+
+{
+    "test": "data"
+}
+
+### Acción no válida en libros
+GET http://localhost/taller_micros/Taller_micros/api/libros.php?action=invalida
+
+### Método HTTP no permitido en alquileres
+DELETE http://localhost/taller_micros/Taller_micros/api/alquileres.php?action=crear

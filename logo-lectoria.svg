@@ -1,0 +1,69 @@
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="bookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity="0.4" flood-color="#000000"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="500" height="500" fill="url(#bgGradient)"/>
+
+  <!-- Libro abierto grande -->
+  <g filter="url(#shadow)">
+    <!-- Lomo del libro (centro) -->
+    <rect x="230" y="120" width="40" height="260" rx="4" fill="#d946ef" opacity="0.8"/>
+
+    <!-- Página izquierda -->
+    <path d="M 120 120 L 230 120 L 230 380 L 120 380 Q 110 380 110 370 L 110 130 Q 110 120 120 120" fill="url(#bookGradient)" opacity="0.95"/>
+
+    <!-- Página derecha -->
+    <path d="M 270 120 L 380 120 Q 390 120 390 130 L 390 370 Q 390 380 380 380 L 270 380 Z" fill="url(#bookGradient)"/>
+
+    <!-- Líneas de páginas - lado izquierdo -->
+    <line x1="140" y1="160" x2="210" y2="160" stroke="white" stroke-width="2.5" opacity="0.7"/>
+    <line x1="140" y1="190" x2="210" y2="190" stroke="white" stroke-width="2.5" opacity="0.65"/>
+    <line x1="140" y1="220" x2="210" y2="220" stroke="white" stroke-width="2.5" opacity="0.6"/>
+    <line x1="140" y1="250" x2="210" y2="250" stroke="white" stroke-width="2.5" opacity="0.55"/>
+    <line x1="140" y1="280" x2="210" y2="280" stroke="white" stroke-width="2.5" opacity="0.5"/>
+    <line x1="140" y1="310" x2="210" y2="310" stroke="white" stroke-width="2.5" opacity="0.45"/>
+    <line x1="140" y1="340" x2="210" y2="340" stroke="white" stroke-width="2.5" opacity="0.4"/>
+
+    <!-- Líneas de páginas - lado derecho -->
+    <line x1="290" y1="160" x2="360" y2="160" stroke="white" stroke-width="2.5" opacity="0.7"/>
+    <line x1="290" y1="190" x2="360" y2="190" stroke="white" stroke-width="2.5" opacity="0.65"/>
+    <line x1="290" y1="220" x2="360" y2="220" stroke="white" stroke-width="2.5" opacity="0.6"/>
+    <line x1="290" y1="250" x2="360" y2="250" stroke="white" stroke-width="2.5" opacity="0.55"/>
+    <line x1="290" y1="280" x2="360" y2="280" stroke="white" stroke-width="2.5" opacity="0.5"/>
+    <line x1="290" y1="310" x2="360" y2="310" stroke="white" stroke-width="2.5" opacity="0.45"/>
+    <line x1="290" y1="340" x2="360" y2="340" stroke="white" stroke-width="2.5" opacity="0.4"/>
+
+    <!-- Marcapáginas rojo -->
+    <rect x="240" y="100" width="12" height="80" rx="2" fill="#ec4899"/>
+
+    <!-- Detalle decorativo en esquina -->
+    <circle cx="360" cy="150" r="6" fill="#fbbf24" opacity="0.8"/>
+  </g>
+
+  <!-- Texto: LeeSmart -->
+  <text x="250" y="440" font-family="Arial, sans-serif" font-size="56" font-weight="bold" text-anchor="middle" fill="white" letter-spacing="1">
+    LeeSmart
+  </text>
+
+  <!-- Línea decorativa -->
+  <line x1="120" y1="460" x2="380" y2="460" stroke="white" stroke-width="2" opacity="0.6"/>
+
+  <!-- Subtítulo -->
+  <text x="250" y="490" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="white" opacity="0.95" letter-spacing="0.5">
+    Tu Plataforma de Lectura
+  </text>
+</svg>
