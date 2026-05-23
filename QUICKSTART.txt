@@ -1,0 +1,160 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   GESTOR DE LIBROS - GUÍA DE INICIO RÁPIDO                      ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+⚡ INICIO EN 3 PASOS (5 MINUTOS)
+
+1. ABRE XAMPP
+   ├─ Busca "XAMPP Control Panel"
+   ├─ Click "Start" en Apache
+   └─ Click "Start" en MySQL
+
+2. CREA LA BD
+   ├─ Abre: http://localhost/phpmyadmin
+   ├─ Click "Nueva" → Nombre: "gestor_libros"
+   ├─ Ve a SQL → Copia database.sql → Pega → Ejecutar
+   └─ ✓ BD creada con 12 libros
+
+3. ABRE LA APP
+   ├─ URL: http://localhost/Taller_micros/index.html
+   ├─ ✓ Ves "Bienvenido al Gestor de Libros"
+   ├─ Click "Registrarse" → Completa formulario
+   ├─ Click "Iniciar sesión" con tus datos
+   └─ ¡Hecho! Explora y alquila libros
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📂 ESTRUCTURA MÍNIMA NECESARIA
+
+C:\xampp\htdocs\taller_micros\Taller_micros\
+├── index.html               (Página de inicio)
+├── login.html               (Login)
+├── registro.html            (Registro)
+├── libros.html              (Catálogo)
+├── biblioteca.html          (Mi Biblioteca)
+├── generos.html             (Por Género)
+├── estilos.css              (Estilos)
+├── database.sql             (BD)
+├── .htaccess                (Reescritura URLs)
+├── js/
+│   ├── api-client.js        (Cliente API)
+│   ├── app.js               (Lógica inicio)
+│   ├── auth.js              (Login/Registro)
+│   ├── libros.js            (Catálogo)
+│   ├── biblioteca.js        (Alquileres)
+│   └── generos.js           (Géneros)
+└── api/
+    ├── index.php            (Gateway)
+    ├── config.php           (Configuración)
+    ├── usuarios.php         (Usuarios)
+    ├── libros.php           (Libros)
+    └── alquileres.php       (Alquileres)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 LINKS IMPORTANTES
+
+Inicio:           http://localhost/Taller_micros/index.html
+phpMyAdmin:       http://localhost/phpmyadmin
+Catálogo:         http://localhost/Taller_micros/libros.html
+Géneros:          http://localhost/Taller_micros/generos.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 PRUEBAS RÁPIDAS
+
+✓ Página carga sin errores
+✓ Puedo registrarme con un nuevo email
+✓ Puedo iniciar sesión
+✓ Veo 12 libros en el catálogo
+✓ Puedo buscar libros (ej: "Quijote")
+✓ Puedo filtrar por género
+✓ Puedo alquilar un libro
+✓ El libro aparece en "Mi Biblioteca"
+✓ Puedo devolver el libro
+✓ El libro desaparece de "Mi Biblioteca"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ PROBLEMAS COMUNES
+
+Problema: "Conexión rechazada"
+Solución: Inicia MySQL en XAMPP → espera 3-5 segundos → recarga
+
+Problema: "Página 404"
+Solución: Usa ruta correcta: /Taller_micros/ (con mayúsculas)
+
+Problema: "No veo libros"
+Solución: Ejecuta database.sql nuevamente en phpMyAdmin
+
+Problema: "No puedo alquilar"
+Solución: Registra e inicia sesión primero
+
+Problema: "Contraseña incorrecta"
+Solución: Verifica mayúsculas/minúsculas - es sensible
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 CARACTERÍSTICAS
+
+Autenticación
+├─ Registro de usuarios
+├─ Login/Logout seguro
+├─ Contraseñas hasheadas (bcrypt)
+└─ Tokens en localStorage
+
+Libros
+├─ Catálogo de 12 libros
+├─ Búsqueda en tiempo real
+├─ Filtrado por género
+├─ Ordenamiento (título, autor, año)
+└─ Portadas de libros
+
+Alquileres
+├─ Alquila de 1-30 días
+├─ Cálculo automático de vencimiento
+├─ Gestión en "Mi Biblioteca"
+├─ Indicador de alquileres vencidos
+└─ Devoluciones con un click
+
+Interfaz
+├─ Diseño responsivo (móvil/tablet/desktop)
+├─ Navegación clara
+├─ Notificaciones de éxito/error
+└─ Header dinámico (muestra usuario)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTACIÓN COMPLETA
+
+- README_GESTOR.md     → Descripción del proyecto
+- SETUP.md             → Instalación paso a paso
+- DEPLOYMENT.md        → Arquitectura y detalles técnicos
+- QUICKSTART.txt       → Este archivo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TIPS
+
+• Usa Ctrl+Shift+I (DevTools) para ver errores en consola
+• Los datos se guardan en localStorage (abre DevTools → Application)
+• Las contraseñas se hashean en el servidor, nunca se guardan planas
+• Todos los alquileres requieren estar autenticado
+• Los alquileres vencidos se marcan en rojo en "Mi Biblioteca"
+• Puedes buscar por título, autor O género simultáneamente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 PRÓXIMOS PASOS
+
+1. Explora todas las páginas
+2. Prueba todas las funcionalidades
+3. Personaliza los estilos en estilos.css
+4. Agrega más libros en phpMyAdmin
+5. Lee DEPLOYMENT.md para entender la arquitectura
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¡Tu Gestor de Libros está listo para usar! 🎉
+
+Desarrollado con: HTML5 | CSS3 | JavaScript | PHP | MySQL
